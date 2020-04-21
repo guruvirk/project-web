@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-sm-6">
+        <mat-form-field>
+            <input matInput numbersOnly name="phone" placeholder="Mobile No" [(ngModel)]="phone"
+                minlength="10" maxlength="10" [required]="true">
+        </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+        <mat-form-field>
+            <input matInput name="password" placeholder="Password" [(ngModel)]="password"
+                [required]="true">
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <button mat-stroked-button color="primary" (click)="login()" >Login</button>
+</div>

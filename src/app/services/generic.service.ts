@@ -1,36 +1,129 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IAuth } from './auth.interface';
 import { environment } from '../../environments/environment';
+import { ServerData } from './models/server-data.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GenericService<TModel> {
+export class GenericService<T> {
 
   constructor(
     private http: HttpClient,
     private _auth: IAuth, ) { }
 
-  create(url, model): Observable<TModel> {
-    return this.http.post<TModel>(`${environment.url}/${url}`, model, { headers: this.getHeaders() })
+  create(url, model): Observable<T> {
+    const subject = new Subject<T>();
+    this.http
+      .post<ServerData<T>>(`${environment.url}/${url}`, model, { headers: this.getHeaders() })
+      .subscribe(
+        (dataModel) => {
+          try {
+            if (dataModel.isSuccess) {
+              subject.next(dataModel.data);
+            } else {
+              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              this.handleError(err, subject)
+              console.log(err)
+            }
+          }
+          catch (err) {
+            this.handleError(err, subject)
+            console.log(err)
+          }
+        })
+    return subject.asObservable();
   }
 
-  get(url): Observable<TModel> {
-    return this.http.get<TModel>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+  get(url): Observable<T> {
+    const subject = new Subject<T>();
+    this.http
+      .get<ServerData<T>>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+      .subscribe(
+        (dataModel) => {
+          try {
+            if (dataModel.isSuccess) {
+              subject.next(dataModel.data);
+            } else {
+              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              this.handleError(err, subject)
+              console.log(err)
+            }
+          }
+          catch (err) {
+            this.handleError(err, subject)
+            console.log(err)
+          }
+        })
+    return subject.asObservable();
   }
 
-  search(url): Observable<TModel> {
-    return this.http.get<TModel>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+  search(url): Observable<T> {
+    const subject = new Subject<T>();
+    this.http
+      .get<ServerData<T>>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+      .subscribe(
+        (dataModel) => {
+          try {
+            if (dataModel.isSuccess) {
+              subject.next(dataModel.data);
+            } else {
+              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              this.handleError(err, subject)
+              console.log(err)
+            }
+          }
+          catch (err) {
+            this.handleError(err, subject)
+            console.log(err)
+          }
+        })
+    return subject.asObservable();
   }
 
-  update(url, model): Observable<TModel> {
-    return this.http.put<TModel>(`${environment.url}/${url}`, model, { headers: this.getHeaders() })
+  update(url, model): Observable<T> {
+    const subject = new Subject<T>();
+    this.http
+      .put<ServerData<T>>(`${environment.url}/${url}`, model, { headers: this.getHeaders() })
+      .subscribe(
+        (dataModel) => {
+          try {
+            if (dataModel.isSuccess) {
+              subject.next(dataModel.data);
+            } else {
+              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              this.handleError(err, subject)
+              console.log(err)
+            }
+          }
+          catch (err) {
+            this.handleError(err, subject)
+            console.log(err)
+          }
+        })
+    return subject.asObservable();
   }
 
-  delete(url): Observable<TModel> {
-    return this.http.delete<TModel>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+  delete(url): Observable<T> {
+    const subject = new Subject<T>();
+    this.http
+      .delete<ServerData<T>>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+      .subscribe(
+        (dataModel) => {
+          try {
+            if (dataModel.isSuccess) {
+              subject.next(dataModel.data);
+            } else {
+              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              this.handleError(err, subject)
+              console.log(err)
+            }
+          }
+          catch (err) {
+            this.handleError(err, subject)
+            console.log(err)
+          }
+        })
+    return subject.asObservable();
   }
 
   getHeaders(): HttpHeaders {
@@ -40,7 +133,7 @@ export class GenericService<TModel> {
 
 
     if (this._auth) {
-      
+
       const user = this._auth.currentUser();
       const tenant = this._auth.currentTenant();
 
@@ -56,4 +149,9 @@ export class GenericService<TModel> {
 
     return headers
   }
+
+  private handleError(err: any, subject: Subject<any>) {
+    subject.error(err);
+  }
+
 }

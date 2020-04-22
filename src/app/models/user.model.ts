@@ -14,6 +14,7 @@ export class User {
   status: string;
   timeStamp: Date;
   session: Session;
+  coins: Number;
 
   constructor(obj?: any) {
     if (!obj) {
@@ -31,6 +32,7 @@ export class User {
     this.bloodGroup = obj.bloodGroup;
     this.gender = obj.gender;
     this.session = new Session(obj.session);
+    this.coins = obj.coins;
 
   }
 }

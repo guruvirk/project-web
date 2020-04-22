@@ -1,44 +1,30 @@
-<div class="row">
-    <div class="col-sm-6">
-        <mat-form-field>
+<mat-card>
+    <mat-card-content>
+        <mat-form-field class="full-width-input">
             <input matInput name="name" placeholder="Name" [(ngModel)]="name" [required]="true">
         </mat-form-field>
-    </div>
-    <div class="col-sm-6">
-        <mat-form-field>
+        <mat-form-field class="full-width-input">
             <input matInput numbersOnly name="age" placeholder="Age" [(ngModel)]="age" [required]="true">
         </mat-form-field>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <mat-form-field>
-            <input matInput name="username" placeholder="Username" (change)="checkCodeValid()" [(ngModel)]="code" [required]="true">
+        <mat-form-field class="full-width-input">
+            <input matInput name="username" placeholder="Username" (change)="checkCodeValid()" [(ngModel)]="code"
+                [required]="true">
         </mat-form-field>
-    </div>
-    <div class="col-sm-6">
-        <mat-form-field>
-            <input matInput numbersOnly name="phone" placeholder="Mobile No" (change)="checkPhoneValid()" [(ngModel)]="phone" minlength="10"
-                maxlength="10" [required]="true">
+        <mat-form-field class="full-width-input">
+            <input matInput numbersOnly name="phone" placeholder="Mobile No" (change)="checkPhoneValid()"
+                [(ngModel)]="phone" minlength="10" maxlength="10" [required]="true">
         </mat-form-field>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <mat-form-field>
+        <mat-form-field class="full-width-input">
             <input matInput name="password" placeholder="Password" [(ngModel)]="password" [required]="true">
         </mat-form-field>
-    </div>
-    <div class="col-sm-6">
-        <mat-form-field>
+        <mat-form-field class="full-width-input">
             <input matInput name="confirm-password" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
                 [required]="true">
         </mat-form-field>
-    </div>
-</div>
-<div class="row">
-    <mat-checkbox [(ngModel)]="tnc">tnc</mat-checkbox>
-</div>
-<div class="row">
-    <button mat-stroked-button color="primary" (click)="register()">Register</button>
-</div>
+        <mat-checkbox [(ngModel)]="tnc"></mat-checkbox>
+        <span class="checkBoxText">I Agree that I am 18 years or older and not a resident of Telangana, Assam, Orissa, Kerala, Sikkim, Nagaland or Gujarat.</span>
+        <br>
+        <br>
+        <button mat-stroked-button color="primary" (click)="register()">Register</button>
+    </mat-card-content>
+</mat-card>

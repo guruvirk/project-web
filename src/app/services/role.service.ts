@@ -5,7 +5,7 @@ import { LocalStorageService } from './local-storage.service';
 import { GenericService } from './generic.service';
 import { IAuth } from './auth.interface';
 import { Tenant } from '../models/tenant.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -35,6 +35,32 @@ export class RoleService implements IAuth {
       this._userSubject.next(this._user)
       this.router.navigate(["home"])
     })
+  }
+
+  register(user): Observable<any> {
+    return this._authApi.create('users/create', user)
+  }
+
+  codeExists(code: String): Boolean {
+    let result = true
+    this._authApi.get(`users/codeExists/${code}`).subscribe(response => {
+      if (!response || response.exists == undefined) {
+        result = true
+      }
+      result = !response.exists
+    })
+    return result
+  }
+
+  phoneExists(phone: number): Boolean {
+    let result = true
+    this._authApi.get(`users/phoneExists/${phone}`).subscribe(response => {
+      if (!response || response.exists == undefined) {
+        result = true
+      }
+      result = !response.exists
+    })
+    return result
   }
 
   currentTenant(): Tenant {

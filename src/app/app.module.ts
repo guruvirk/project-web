@@ -14,6 +14,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { PurchaseComponent } from './purchase/purchase.component';
+import { SellComponent } from './sell/sell.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    PurchaseComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,

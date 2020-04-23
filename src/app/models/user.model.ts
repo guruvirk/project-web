@@ -1,4 +1,5 @@
 import { Session } from './session.model';
+import { Tenant } from '.';
 
 export class User {
 
@@ -15,6 +16,7 @@ export class User {
   timeStamp: Date;
   session: Session;
   coins: Number;
+  tenant: Tenant;
 
   constructor(obj?: any) {
     if (!obj) {
@@ -33,6 +35,6 @@ export class User {
     this.gender = obj.gender;
     this.session = new Session(obj.session);
     this.coins = obj.coins;
-
+    this.tenant = new Tenant(obj.tenant);
   }
 }

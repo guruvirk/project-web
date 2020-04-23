@@ -57,8 +57,8 @@ export class RegisterComponent implements OnInit {
       code: this.code,
       phone: this.phone,
     }).subscribe(response => {
-      if (response && response.id) {
-        this.router.navigate(["confirm"])
+      if (response && response.id && response.phone) {
+        this.router.navigate(["confirm", response.phone])
       }
       else {
         return "Error While Registering"

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class RoleService implements IAuth {
 
   private _authApi: GenericService<any>;
+  private _tenantApi: GenericService<Tenant>;
   private _user: User
   private _tenant: Tenant
   private _userSubject = new Subject<User>();
@@ -26,6 +27,8 @@ export class RoleService implements IAuth {
     private http: HttpClient,
     private router: Router) {
     this._authApi = new GenericService(this.http, this);
+    this._tenantApi = new GenericService(this.http, this);
+    this.setTenant()
   }
 
   login(phone, password) {
@@ -33,6 +36,21 @@ export class RoleService implements IAuth {
       this._user = user;
       this.localDb.update('user', this._user);
       this._userSubject.next(this._user)
+      this._tenant = user.tenant;
+      this.localDb.update('tenant', this._tenant);
+      this._tenantSubject.next(this._tenant)
+      this.router.navigate(["home"])
+    })
+  }
+
+  confirm(phone, otp) {
+    this._authApi.create('users/confirm', { phone: phone, otp: otp }).subscribe(user => {
+      this._user = user;
+      this.localDb.update('user', this._user);
+      this._userSubject.next(this._user)
+      this._tenant = user.tenant;
+      this.localDb.update('tenant', this._tenant);
+      this._tenantSubject.next(this._tenant)
       this.router.navigate(["home"])
     })
   }
@@ -68,26 +86,33 @@ export class RoleService implements IAuth {
       return this._tenant;
     }
 
-    const savedTenant = this.localDb.get('tenant') || new Tenant({ code: "ludo" });
+    const savedTenant = this.localDb.get('tenant');
 
     if (!savedTenant) {
       return null
     }
 
     this._tenant = new Tenant(savedTenant)
-    this._tenantSubject.next(this._tenant)
 
     return this._tenant;
+
   }
 
   currentUser(): User {
+
+    if (this._user && !this._user.session) {
+      this._user = null
+      return null
+    }
+
     if (this._user) {
       return this._user;
     }
 
     const savedUser = this.localDb.get('user');
 
-    if (!savedUser) {
+    if (!savedUser || !savedUser.session) {
+      this._user = null
       return null
     }
 
@@ -98,6 +123,25 @@ export class RoleService implements IAuth {
 
   hasPermission(permissions: string | string[]): boolean {
     return true
+  }
+
+  setTenant() {
+
+    const code = "ludo"
+
+    this._tenantApi.get('tenants/' + code).subscribe(tenant => {
+      this.localDb.update('tenant', tenant);
+      this._tenant = tenant
+      this._tenantSubject.next(this._tenant)
+    })
+
+  }
+
+  changeUser(user: User) {
+    user.session = this._user.session
+    this.localDb.update('user', user);
+    this._user = user
+    this._userSubject.next(this._user)
   }
 
 }

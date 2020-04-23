@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../services/role.service';
 import { Router } from '@angular/router';
+import { UxService } from '../services/ux.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
   phoneValid: Boolean = false
 
   constructor(private auth: RoleService,
-    private router: Router) { }
+    private router: Router,
+    private uxService: UxService) { }
 
   ngOnInit() {
   }
@@ -39,16 +41,20 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (!this.codeValid) {
-      return "Username is already taken"
+      this.uxService.handleError("Username is already taken")
+      return
     }
     if (!this.phoneValid) {
-      return "Mobile No is already taken"
-    }
-    if (!this.tnc) {
-      return "Please accept T&C"
+      this.uxService.handleError("Mobile No is already taken")
+      return
     }
     if (this.confirmPassword != this.password) {
-      return "Password Does't Match"
+      this.uxService.handleError("Password Does't Match")
+      return
+    }
+    if (!this.tnc) {
+      this.uxService.handleError("Please accept T&C")
+      return
     }
     this.auth.register({
       name: this.name,
@@ -61,7 +67,8 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(["confirm", response.phone])
       }
       else {
-        return "Error While Registering"
+        this.uxService.handleError("Error While Registering")
+        this.router.navigate(["/"])
       }
     })
   }

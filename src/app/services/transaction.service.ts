@@ -4,6 +4,7 @@ import { Transaction } from '../models';
 import { GenericService } from './generic.service';
 import { RoleService } from './role.service';
 import { Observable } from 'rxjs';
+import { UxService } from './ux.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class TransactionService {
   private _txnApi: GenericService<Transaction>;
 
   constructor(private http: HttpClient,
-    private roleService: RoleService) {
-    this._txnApi = new GenericService(this.http, this.roleService);
+    private roleService: RoleService,
+    private uxService: UxService) {
+    this._txnApi = new GenericService(this.http, this.roleService, this.uxService);
   }
 
   add(amount, transactionId): Observable<Transaction> {

@@ -16,6 +16,7 @@ import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, Mat
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SellComponent } from './sell/sell.component';
+import { MatSnackBarModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SellComponent } from './sell/sell.component';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

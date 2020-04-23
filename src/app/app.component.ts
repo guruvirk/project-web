@@ -33,4 +33,8 @@ export class AppComponent {
       this.roter.navigate(["home"])
     }
   }
+
+  logout(){
+    this.auth.logout()
+  }
 }

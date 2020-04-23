@@ -1,4 +1,4 @@
-<div *ngIf="currentTenant" style="height: 80vh;">
+<div *ngIf="currentTenant" style="height: 90vh;">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
@@ -15,6 +15,7 @@
                 <button *ngIf="currentUser" [routerLink]="['sell']" mat-button>Sell Coins</button>
             </div>
             <button *ngIf="currentUser" mat-button>Coins: {{currentUser.coins || 0}}</button>
+            <button *ngIf="currentUser" (click)="logout()" mat-button>Logout</button>
         </mat-toolbar-row>
     </mat-toolbar>
 

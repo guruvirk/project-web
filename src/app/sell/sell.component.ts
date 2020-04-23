@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../services/role.service';
 import { Router } from '@angular/router';
 import { TransactionService } from '../services/transaction.service';
+import { UxService } from '../services/ux.service';
 
 @Component({
   selector: 'app-sell',
@@ -16,26 +17,32 @@ export class SellComponent implements OnInit {
 
   constructor(private auth: RoleService,
     private transactionService: TransactionService,
-    private router: Router) { }
+    private router: Router,
+    private uxService: UxService) { }
 
   ngOnInit() {
   }
 
   sell() {
     if (!this.phone) {
-      return "Paytm Mobile No is required"
+      this.uxService.handleError("Paytm Mobile No is required")
+      return
     }
     if (!this.amount || this.amount < 1) {
-      return "Amount is required"
+      this.uxService.handleError("Amount is required")
+      return
     }
     if (this.amount > 10000) {
-      return "Limit is 10,000"
+      this.uxService.handleError("Limit is 10,000")
+      return
     }
     if (!this.tnc) {
-      return "Please accept T&C"
+      this.uxService.handleError("Please accept T&C")
+      return
     }
     this.transactionService.out(this.phone, this.amount).subscribe(transaction => {
       if (transaction && transaction.status == "pending") {
+        this.uxService.showInfo(`${transaction.coins} Coins Sell Request Submitted`)
         this.auth.changeUser(transaction.user)
         this.router.navigate(["home"])
       }

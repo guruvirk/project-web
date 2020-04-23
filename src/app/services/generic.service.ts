@@ -4,12 +4,14 @@ import { Observable, Subject } from 'rxjs';
 import { IAuth } from './auth.interface';
 import { environment } from '../../environments/environment';
 import { ServerData } from './models/server-data.model';
+import { UxService } from './ux.service';
 
 export class GenericService<T> {
 
   constructor(
     private http: HttpClient,
-    private _auth: IAuth, ) { }
+    private _auth: IAuth,
+    private uxService: UxService) { }
 
   create(url, model): Observable<T> {
     const subject = new Subject<T>();
@@ -21,7 +23,7 @@ export class GenericService<T> {
             if (dataModel.isSuccess) {
               subject.next(dataModel.data);
             } else {
-              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)
               console.log(err)
             }
@@ -44,7 +46,7 @@ export class GenericService<T> {
             if (dataModel.isSuccess) {
               subject.next(dataModel.data);
             } else {
-              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)
               console.log(err)
             }
@@ -67,7 +69,7 @@ export class GenericService<T> {
             if (dataModel.isSuccess) {
               subject.next(dataModel.data);
             } else {
-              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)
               console.log(err)
             }
@@ -90,7 +92,7 @@ export class GenericService<T> {
             if (dataModel.isSuccess) {
               subject.next(dataModel.data);
             } else {
-              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)
               console.log(err)
             }
@@ -113,7 +115,7 @@ export class GenericService<T> {
             if (dataModel.isSuccess) {
               subject.next(dataModel.data);
             } else {
-              const err = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+              const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)
               console.log(err)
             }
@@ -151,7 +153,8 @@ export class GenericService<T> {
   }
 
   private handleError(err: any, subject: Subject<any>) {
-    subject.error(err);
+    this.uxService.handleError(err)
+    subject.complete()
   }
 
 }

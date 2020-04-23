@@ -7,6 +7,8 @@ import { IAuth } from './auth.interface';
 import { Tenant } from '../models/tenant.model';
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { UxService } from './ux.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +27,10 @@ export class RoleService implements IAuth {
 
   constructor(private localDb: LocalStorageService,
     private http: HttpClient,
-    private router: Router) {
-    this._authApi = new GenericService(this.http, this);
-    this._tenantApi = new GenericService(this.http, this);
+    private router: Router,
+    private uxService: UxService) {
+    this._authApi = new GenericService(this.http, this, this.uxService);
+    this._tenantApi = new GenericService(this.http, this, this.uxService);
     this.setTenant()
   }
 
@@ -39,6 +42,7 @@ export class RoleService implements IAuth {
       this._tenant = user.tenant;
       this.localDb.update('tenant', this._tenant);
       this._tenantSubject.next(this._tenant)
+      this.uxService.showInfo("Succefully Logged In")
       this.router.navigate(["home"])
     })
   }
@@ -51,6 +55,7 @@ export class RoleService implements IAuth {
       this._tenant = user.tenant;
       this.localDb.update('tenant', this._tenant);
       this._tenantSubject.next(this._tenant)
+      this.uxService.showInfo("Registered Succefully")
       this.router.navigate(["home"])
     })
   }
@@ -127,7 +132,7 @@ export class RoleService implements IAuth {
 
   setTenant() {
 
-    const code = "ludo"
+    const code = environment.tenant
 
     this._tenantApi.get('tenants/' + code).subscribe(tenant => {
       this.localDb.update('tenant', tenant);
@@ -142,6 +147,17 @@ export class RoleService implements IAuth {
     this.localDb.update('user', user);
     this._user = user
     this._userSubject.next(this._user)
+  }
+
+  logout() {
+    this._authApi.get(`users/logout/${this._user.session.id}`).subscribe()
+    const tenant = this.localDb.get('tenant');
+    this.localDb.clear();
+    this.localDb.update('tenant', tenant);
+    this._userSubject.next(null);
+    this._userSubject.next(null);
+    this.uxService.showInfo("Logged Out Succefully")
+    this.router.navigate(["/"])
   }
 
 }

@@ -59,15 +59,15 @@ export class GenericService<T> {
     return subject.asObservable();
   }
 
-  search(url): Observable<T> {
-    const subject = new Subject<T>();
+  search(url, obj): Observable<T[]> {
+    const subject = new Subject<T[]>();
     this.http
-      .get<ServerData<T>>(`${environment.url}/${url}`, { headers: this.getHeaders() })
+      .get<ServerData<T>>(`${environment.url}/${url}?${new URLSearchParams(obj).toString()}`, { headers: this.getHeaders() })
       .subscribe(
         (dataModel) => {
           try {
             if (dataModel.isSuccess) {
-              subject.next(dataModel.data);
+              subject.next(dataModel.items);
             } else {
               const err = dataModel.error || dataModel.code || dataModel.message || 'failed';
               this.handleError(err, subject)

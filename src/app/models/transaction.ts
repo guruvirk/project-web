@@ -19,7 +19,6 @@ export class Transaction {
     this.id = obj.id;
     this.date = obj.date;
     this.type = obj.type;
-    this.user = obj.user;
     this.status = obj.status;
     this.user = new User(obj.user);
     this.coins = obj.coins;

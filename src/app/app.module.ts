@@ -17,6 +17,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SellComponent } from './sell/sell.component';
 import { MatSnackBarModule } from "@angular/material";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
+import { ContestComponent } from './contest/contest.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { MatSnackBarModule } from "@angular/material";
     HomeComponent,
     ConfirmComponent,
     PurchaseComponent,
-    SellComponent
+    SellComponent,
+    ContestComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ import { MatSnackBarModule } from "@angular/material";
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

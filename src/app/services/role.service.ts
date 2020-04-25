@@ -149,6 +149,17 @@ export class RoleService implements IAuth {
     this._userSubject.next(this._user)
   }
 
+  refreshUser() {
+    let user = this.currentUser()
+    this._authApi.get(`users/my`).subscribe(item => {
+      user.code = item.code
+      user.coins = item.coins
+      this.localDb.update('user', user);
+      this._user = user
+      this._userSubject.next(this._user)
+    })
+  }
+
   logout() {
     this._authApi.get(`users/logout/${this._user.session.id}`).subscribe()
     const tenant = this.localDb.get('tenant');

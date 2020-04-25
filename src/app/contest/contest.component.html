@@ -1,0 +1,39 @@
+<mat-card *ngIf="contest">
+    <ng-container *ngIf="isHost">
+        <h5 class="title">Your Opponent - {{contest.guest.name}}</h5>
+        <h6 class="sub-title">WhatsApp No - {{contest.guest.phone}}<br>In Game Name - {{contest.guest.code}}</h6>
+    </ng-container>
+    <ng-container *ngIf="!isHost">
+        <h5 class="title">Your Opponent - {{contest.host.name}}</h5>
+        <h6 class="sub-title">WhatsApp No - {{contest.host.phone}}<br>In Game Name - {{contest.host.code}}</h6>
+    </ng-container>
+    <br>
+    <ng-container *ngIf="contest.status=='ready'">
+        <ng-container *ngIf="isHost">
+            <mat-card-content>
+                <mat-form-field class="full-width-input">
+                    <input matInput name="roomCode" placeholder="Room Code" [(ngModel)]="roomCode" [required]="true">
+                </mat-form-field>
+                <button mat-stroked-button color="primary" (click)="setRoomCode()">Start</button>
+            </mat-card-content>
+        </ng-container>
+        <ng-container *ngIf="!isHost">
+            <mat-card-content>
+                <p>Please Wait for {{contest.host.name}} to add Romm Code</p>
+            </mat-card-content>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="contest.status=='ongoing'">
+        <ng-container *ngIf="isHost">
+            <mat-card-content>
+                <button mat-stroked-button color="primary" (click)="hostSubmit()">Submit</button>
+            </mat-card-content>
+        </ng-container>
+        <ng-container *ngIf="!isHost">
+            <mat-card-content>
+                <p>Please Join Romm Code - <b>{{contest.roomCode}}</b></p>
+                <button mat-stroked-button color="primary" (click)="guestSubmit()">Submit</button>
+            </mat-card-content>
+        </ng-container>
+    </ng-container>
+</mat-card>

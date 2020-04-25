@@ -7,12 +7,14 @@ import { UserGuard } from './guards/user.guard';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SellComponent } from './sell/sell.component';
+import { ContestComponent } from './contest/contest.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'confirm/:id', component: ConfirmComponent },
+  { path: 'contest/:id', component: ContestComponent, canActivate: [UserGuard] },
   { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
   { path: 'buy', component: PurchaseComponent, canActivate: [UserGuard] },
   { path: 'sell', component: SellComponent, canActivate: [UserGuard] },

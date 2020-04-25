@@ -23,3 +23,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-simple-snackbar {
     display: inline-block !important;
 }
+
+.title {
+    color: var(--primary);
+  }
+  
+  .sub-title {
+    color: var(--primary);
+  }
+
+  .emptyInfo {
+    text-align: center;
+    color: grey;
+  }

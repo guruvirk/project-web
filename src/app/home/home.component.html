@@ -1,1 +1,79 @@
-<p>home works!</p>
+<mat-card>
+    <mat-card-content>
+        <mat-form-field class="full-width-input">
+            <input matInput name="amount" placeholder="Amount" [(ngModel)]="amount" [required]="true">
+        </mat-form-field>
+        <button mat-stroked-button color="primary" (click)="create()">Create Contest</button>
+    </mat-card-content>
+</mat-card>
+<ng-container *ngIf="(mycontests && mycontests.length) || (mypublished && mypublished.length)">
+    <h5 class="title">My Contests</h5>
+    <ng-container *ngIf="mycontests && mycontests.length">
+        <mat-nav-list>
+            <ng-container *ngFor="let contest of mycontests">
+                <mat-list-item>
+                    <a matLine (click)="play(contest)">{{contest.host.name}} vs
+                        {{contest.guest.name}} for
+                        <b>₹{{contest.coins}}</b></a>
+                    <button *ngIf="!contest.applied" (click)="play(contest)" mat-icon-button>
+                        <mat-icon color="primary">play_circle_filled</mat-icon>
+                    </button>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+        <br>
+    </ng-container>
+    <ng-container *ngIf="mypublished && mypublished.length">
+        <ng-container *ngFor="let contest of mypublished">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{contest.host.name}} have set a
+                            Challenge for &nbsp;<b>₹{{contest.coins}}</b>
+                        </mat-panel-title>
+                        <mat-panel-description *ngIf="contest.bids && contest.bids.length">
+                            {{contest.bids.length}} New Request's For Contest
+                        </mat-panel-description>
+                        <mat-panel-description *ngIf="!contest.bids || !contest.bids.length">
+                            No Requets Yet
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-container *ngIf="contest.bids && contest.bids.length">
+                        <mat-nav-list>
+                            <ng-container *ngFor="let bid of contest.bids">
+                                <mat-list-item>
+                                    <a matLine (click)="approve(bid)">{{bid.guest.name}}</a>
+                                    <button (click)="approve(bid)" mat-stroked-button color="primary">Accept</button>
+                                </mat-list-item>
+                            </ng-container>
+                        </mat-nav-list>
+                    </ng-container>
+                    <mat-action-row>
+                        <button mat-button color="warn" (click)="cancelContest(contest)">Cancel Contest</button>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </ng-container>
+        <br>
+    </ng-container>
+</ng-container>
+<br>
+<h5 class="title" *ngIf="contests && contests.length">Avalable Contests</h5>
+<h6 class="emptyInfo" *ngIf="!(contests && contests.length) && !(mycontests && mycontests.length) && !(mypublished && mypublished.length)">No Contests Avalable! Please Create One</h6>
+<mat-nav-list>
+    <ng-container *ngFor="let contest of contests">
+        <mat-list-item>
+            <a *ngIf="!contest.applied" matLine (click)="bid(contest)">{{contest.host.name}} have set a
+                Challenge for
+                <b>₹{{contest.coins}}</b></a>
+            <button *ngIf="!contest.applied" (click)="bid(contest)" mat-stroked-button color="primary">Request To
+                Play</button>
+            <a *ngIf="contest.applied" matLine href="javascript:void(0)">{{contest.host.name}} have set a Challenge
+                for
+                <b>₹{{contest.coins}}</b></a>
+            <button *ngIf="contest.applied" (click)="cancelBid(contest)" mat-stroked-button color="warn">Cancel
+                Request</button>
+        </mat-list-item>
+    </ng-container>
+</mat-nav-list>

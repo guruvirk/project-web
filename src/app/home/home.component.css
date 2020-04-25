@@ -30,8 +30,15 @@ mat-form-field {
   display: block;
 }
 
+mat-expansion-panel-header {
+  height: 50px;
+}
+
 @media screen and (max-width: 960px) {
   mat-card {
       width: 70%;
+  }
+  mat-expansion-panel-header {
+    height: 60px;
   }
 }

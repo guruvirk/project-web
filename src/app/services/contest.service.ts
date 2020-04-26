@@ -12,11 +12,13 @@ import { Contest } from '../models/contest';
 export class ContestService {
 
   private _api: GenericService<Contest>;
+  private _upload: GenericService<String>;
 
   constructor(private http: HttpClient,
     private roleService: RoleService,
     private uxService: UxService) {
     this._api = new GenericService(this.http, this.roleService, this.uxService);
+    this._upload = new GenericService(this.http, this.roleService, this.uxService);
   }
 
   create(coins): Observable<Contest> {
@@ -35,8 +37,20 @@ export class ContestService {
     return this._api.search(`contests`, query)
   }
 
+  upload(file: File): Observable<String> {
+    return this._upload.upload(`upload`, file)
+  }
+
   roomCode(code, contest: Contest): Observable<Contest> {
     return this._api.create('contests/roomCode', { contest: contest, roomCode: code })
+  }
+
+  guestResult(model: any): Observable<Contest> {
+    return this._api.create('contests/guestResult', model)
+  }
+
+  hostResult(model: any): Observable<Contest> {
+    return this._api.create('contests/hostResult', model)
   }
 
 }

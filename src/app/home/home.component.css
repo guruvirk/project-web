@@ -16,6 +16,11 @@
   background: #ece5f7;
 }
 
+.mat-list-item {
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
 mat-expansion-panel-header:hover {
   background-color: #ece5f7
 }

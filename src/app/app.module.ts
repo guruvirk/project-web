@@ -20,6 +20,7 @@ import { MatSnackBarModule } from "@angular/material";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ContestComponent } from './contest/contest.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ContestComponent } from './contest/contest.component';
     FlexLayoutModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

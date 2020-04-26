@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getData()
+    this.getAvalable()
   }
 
   bid(contest: Contest) {
@@ -50,7 +51,10 @@ export class HomeComponent implements OnInit {
         this.contests.push(item)
       });
     })
-    this.api.search({ my: true, status: ["ongoing", "ready"] }).subscribe(items => {
+  }
+
+  getMy() {
+    this.api.search({ my: true, status: ["ongoing", "ready", "cancelRequest", "conflict"] }).subscribe(items => {
       if (!this.mycontests && items.length) {
         this.auth.refreshUser()
       }
@@ -112,6 +116,7 @@ export class HomeComponent implements OnInit {
     this.bidService.approve(bid).subscribe(() => {
       this.uxService.showInfo("Approved Succesfully")
       this.getContest()
+      this.getMy()
       this.getPublished()
       this.auth.refreshUser()
     })
@@ -122,12 +127,20 @@ export class HomeComponent implements OnInit {
   }
 
   getData() {
-    this.getContest()
     this.getPublished()
+    this.getMy()
     let this_new = this
     setTimeout(function () {
       this_new.getData()
-    }, 10000);
+    }, 7000);
+  }
+
+  getAvalable() {
+    this.getContest()
+    let this_new = this
+    setTimeout(function () {
+      this_new.getAvalable()
+    }, 3000);
   }
 
   create() {

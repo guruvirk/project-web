@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { FileItem, FileUploader } from 'ng2-file-upload';
+import { Headers } from 'ng2-file-upload';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { IAuth } from './auth.interface';
@@ -125,6 +127,57 @@ export class GenericService<T> {
             console.log(err)
           }
         })
+    return subject.asObservable();
+  }
+
+  upload(url, file: File): Observable<T> {
+    const headers: Headers[] = [];
+
+    const httpHeaders = this.getHeaders();
+    for (const name of httpHeaders.keys()) {
+      const value = httpHeaders.get(name);
+
+      if (name === 'Content-Type' || !value) {
+        continue;
+      }
+
+      headers.push({
+        name,
+        value
+      });
+    }
+
+    const uploader = new FileUploader({
+      url: `${environment.url}/${url}`,
+      headers,
+      autoUpload: true
+    });
+
+    uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    };
+
+    const subject = new Subject<any>();
+
+    uploader.onErrorItem = (item: FileItem, response: string, status: number) => {
+      const error = new Error('failed');
+      this.handleError(error, subject);
+    };
+
+    uploader.onCompleteItem = (item: FileItem, response: string, status: number) => {
+      const dataModel = JSON.parse(response) as ServerData<any>;
+      const isSuccess = dataModel.isSuccess !== undefined ? dataModel.isSuccess : (dataModel as any).IsSuccess;
+
+      if (!isSuccess) {
+        const error = new Error(dataModel.error || dataModel.code || dataModel.message || 'failed');
+        this.handleError(error, subject);
+      } else {
+        subject.next(dataModel.data);
+      }
+    };
+
+    uploader.addToQueue([file]);
+
     return subject.asObservable();
   }
 

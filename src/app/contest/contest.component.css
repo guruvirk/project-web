@@ -8,6 +8,17 @@ mat-card {
     display: block;
   }
 
+  .result-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .result-radio-button {
+    font-size: 14px;
+    margin: 5px;
+  }
+
   @media screen and (max-width: 960px) {
     mat-card {
         width: 85%;

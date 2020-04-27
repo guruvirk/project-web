@@ -21,6 +21,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ContestComponent } from './contest/contest.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { ConflictComponent } from './conflict/conflict.component';
+import { CancelComponent } from './cancel/cancel.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { MatRadioModule } from '@angular/material/radio';
     ConfirmComponent,
     PurchaseComponent,
     SellComponent,
-    ContestComponent
+    ContestComponent,
+    ConflictComponent,
+    CancelComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSnackBarModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

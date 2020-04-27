@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contest } from '../models/contest';
 import { RoleService } from '../services/role.service';
 import { Router } from '@angular/router';
@@ -12,12 +12,13 @@ import { Bid } from '../models';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   contests: Contest[]
   mycontests: Contest[]
   mypublished: Contest[]
   amount: Number
+  timeOutIDs: any[] = [];
 
   constructor(private api: ContestService,
     private bidService: BidService,
@@ -28,6 +29,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getData()
     this.getAvalable()
+  }
+
+  ngOnDestroy(): void {
+    this.timeOutIDs.forEach(id => clearTimeout(id));
   }
 
   bid(contest: Contest) {
@@ -130,17 +135,21 @@ export class HomeComponent implements OnInit {
     this.getPublished()
     this.getMy()
     let this_new = this
-    setTimeout(function () {
-      this_new.getData()
-    }, 7000);
+    this.timeOutIDs.push(
+      setTimeout(function () {
+        this_new.getData()
+      }, 7000)
+    );
   }
 
   getAvalable() {
     this.getContest()
     let this_new = this
-    setTimeout(function () {
-      this_new.getAvalable()
-    }, 3000);
+    this.timeOutIDs.push(
+      setTimeout(function () {
+        this_new.getAvalable()
+      }, 3000)
+    );
   }
 
   create() {

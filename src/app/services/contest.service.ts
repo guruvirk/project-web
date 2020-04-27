@@ -53,4 +53,12 @@ export class ContestService {
     return this._api.create('contests/hostResult', model)
   }
 
+  conflictResult(contest: Contest, result: string): Observable<Contest> {
+    return this._api.create('contests/conflictResult', { contest: contest, result: result })
+  }
+
+  cancelRequestResult(contest: Contest, result: string): Observable<Contest> {
+    return this._api.create('contests/cancelRequestResult', { contest: contest, result: result })
+  }
+
 }

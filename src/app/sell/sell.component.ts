@@ -43,7 +43,9 @@ export class SellComponent implements OnInit {
     this.transactionService.out(this.phone, this.amount).subscribe(transaction => {
       if (transaction && transaction.status == "pending") {
         this.uxService.showInfo(`${transaction.coins} Coins Sell Request Submitted`)
-        this.auth.changeUser(transaction.user)
+        let user = this.auth.currentUser()
+        user.coins = transaction.user.coins
+        this.auth.changeUser(user)
         this.router.navigate(["home"])
       }
     })

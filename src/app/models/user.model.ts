@@ -17,6 +17,7 @@ export class User {
   session: Session;
   coins: Number;
   tenant: Tenant;
+  permissions: String[]
 
   constructor(obj?: any) {
     if (!obj) {
@@ -36,5 +37,6 @@ export class User {
     this.session = new Session(obj.session);
     this.coins = obj.coins;
     this.tenant = new Tenant(obj.tenant);
+    this.permissions = obj.permissions || []
   }
 }

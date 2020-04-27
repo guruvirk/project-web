@@ -13,6 +13,10 @@
                 <button *ngIf="currentUser" [routerLink]="['home']" mat-button>Home</button>
                 <button *ngIf="currentUser" [routerLink]="['buy']" mat-button>Buy Coins</button>
                 <button *ngIf="currentUser" [routerLink]="['sell']" mat-button>Sell Coins</button>
+                <button *ngIf="auth.hasPermission('admin')" [routerLink]="['cancel']" mat-button>Cancel
+                    Requests</button>
+                <button *ngIf="auth.hasPermission('admin')" [routerLink]="['conflict']" mat-button>Conflit
+                    Contests</button>
             </div>
             <button *ngIf="currentUser" mat-button>Coins: {{currentUser.coins || 0}}</button>
             <button *ngIf="currentUser" (click)="logout()" mat-button>Logout</button>
@@ -28,6 +32,12 @@
                 <a *ngIf="currentUser" [routerLink]="['home']" routerLinkActive="active" mat-list-item>Home</a>
                 <a *ngIf="currentUser" [routerLink]="['buy']" routerLinkActive="active" mat-list-item>Buy Coins</a>
                 <a *ngIf="currentUser" [routerLink]="['sell']" routerLinkActive="active" mat-list-item>Sell Coins</a>
+                <a *ngIf="auth.hasPermission('admin')" [routerLink]="['cancel']" routerLinkActive="active"
+                    mat-list-item>Cancel
+                    Requests</a>
+                <a *ngIf="auth.hasPermission('admin')" [routerLink]="['conflict']" routerLinkActive="active"
+                    mat-list-item>Conflit
+                    Contests</a>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content autosize fxFlexFill>

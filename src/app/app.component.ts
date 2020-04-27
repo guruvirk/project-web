@@ -15,7 +15,7 @@ export class AppComponent {
   currentTenant: Tenant;
 
   constructor(
-    private auth: RoleService,
+    public auth: RoleService,
     private roter: Router
   ) {
     this.auth.userChanges.subscribe((user) => {

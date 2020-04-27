@@ -127,7 +127,27 @@ export class RoleService implements IAuth {
   }
 
   hasPermission(permissions: string | string[]): boolean {
-    return true
+    if (!permissions || Array.isArray(permissions) && !permissions.length) {
+      return true;
+    }
+
+    const currentUser = this.currentUser();
+    if (!currentUser) { return false; }
+
+    if (!currentUser.permissions || !currentUser.permissions.length) { return false; }
+
+    if (typeof permissions === 'string') {
+      return !!currentUser.permissions.find((item) => item.toLowerCase() === permissions.toLowerCase());
+    }
+
+    for (const permission of permissions) {
+      const value = currentUser.permissions.find((item) => item.toLowerCase() === permission.toLowerCase());
+      if (value) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   setTenant() {

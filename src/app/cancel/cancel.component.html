@@ -1,0 +1,72 @@
+<mat-accordion displayMode="flat" multi class="mat-table">
+    <section matSort class="mat-elevation-z2 mat-header-row">
+        <span class="mat-header-cell" mat-sort-header="date">Date</span>
+        <span class="mat-header-cell" mat-sort-header="coins">Coins</span>
+        <span class="mat-header-cell" mat-sort-header="host">Host</span>
+        <span class="mat-header-cell" mat-sort-header="hostResult">Host Result</span>
+        <span class="mat-header-cell" mat-sort-header="hostImage">Host Screenshot</span>
+        <span class="mat-header-cell" mat-sort-header="hostImage">Host Proof Video</span>
+        <span class="mat-header-cell" mat-sort-header="hostImage">Host Cancel Reason</span>
+        <span class="mat-header-cell" mat-sort-header="guest">Guest</span>
+        <span class="mat-header-cell" mat-sort-header="guestresult">Guest Result</span>
+        <span class="mat-header-cell" mat-sort-header="guestImage">Guest Screenshot</span>
+        <span class="mat-header-cell" mat-sort-header="hostImage">Guest Proof Video</span>
+        <span class="mat-header-cell" mat-sort-header="hostImage">Guest Cancel Reason</span>
+    </section>
+
+    <mat-expansion-panel *ngFor="let contest of contests">
+        <mat-expansion-panel-header class="mat-row">
+            <span class="mat-cell">{{contest.date | date}}</span>
+            <span class="mat-cell">{{contest.coins}}</span>
+            <span class="mat-cell">{{contest.host.name}} ({{contest.host.code}})<br>
+                <span class="sub-text">{{contest.host.phone}}</span></span>
+            <span class="mat-cell">{{contest.hostResult}}</span>
+            <span *ngIf="contest.hostImage" class="mat-cell"><a [href]="contest.hostImage"
+                    title="Download Host Screenshot">
+                    <mat-icon color="primary">cloud_download</mat-icon>
+                </a></span>
+            <span *ngIf="!contest.hostImage" class="mat-cell">Not Provided</span>
+            <span *ngIf="contest.hostVideo" class="mat-cell"><a [href]="contest.hostVideo" title="Download Host Video">
+                    <mat-icon color="primary">cloud_download</mat-icon>
+                </a></span>
+            <span *ngIf="!contest.hostVideo" class="mat-cell">--</span>
+            <span *ngIf="contest.hostCancelReason" class="mat-cell">{{contest.hostCancelReason}}</span>
+            <span *ngIf="!contest.hostCancelReason" class="mat-cell">--</span>
+            <span class="mat-cell">{{contest.guest.name}}({{contest.guest.code}})<br>
+                <span class="sub-text">{{contest.guest.phone}}</span></span>
+            <span class="mat-cell">{{contest.guestResult}}</span>
+            <span *ngIf="contest.guestImage" class="mat-cell"><a [href]="contest.guestImage"
+                    title="Download Guest Screenshot">
+                    <mat-icon color="primary">cloud_download</mat-icon>
+                </a></span>
+            <span *ngIf="!contest.guestImage" class="mat-cell">--</span>
+            <span *ngIf="contest.guestVideo" class="mat-cell"><a [href]="contest.guestVideo"
+                    title="Download Guest Video">
+                    <mat-icon color="primary">cloud_download</mat-icon>
+                </a></span>
+            <span *ngIf="!contest.guestVideo" class="mat-cell">--</span>
+            <span *ngIf="contest.guestCancelReason" class="mat-cell">{{contest.guestCancelReason}}</span>
+            <span *ngIf="!contest.guestCancelReason" class="mat-cell">--</span>
+        </mat-expansion-panel-header>
+        <div style="text-align: center;">
+            <mat-divider></mat-divider>
+            <br>
+            <mat-form-field>
+                <mat-label>Result of Contest</mat-label>
+                <mat-select [(ngModel)]="contest.result">
+                    <mat-option value="host">
+                        Host Won
+                    </mat-option>
+                    <mat-option value="guest">
+                        Guest Won
+                    </mat-option>
+                    <mat-option value="refund">
+                        Refund Both
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button style="margin-left: 5%;" mat-stroked-button color="primary"
+                (click)="submitResult(contest)">Submit</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

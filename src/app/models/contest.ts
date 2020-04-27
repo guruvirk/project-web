@@ -15,9 +15,16 @@ export class Contest {
   coins: Number;
   roomCode: string;
   hostResult: string;
+  hostImage: string;
+  hostCancelReason: string;
+  hostVideo: string;
   guestResult: string;
+  guestImage: string;
+  guestCancelReason: string;
+  guestVideo: string;
   bids: Bid[];
   applied: Boolean;
+  result: string;
 
   constructor(obj?: any) {
     if (!obj) {
@@ -36,6 +43,12 @@ export class Contest {
     this.coins = obj.coins;
     this.hostResult = obj.hostResult;
     this.guestResult = obj.guestResult;
+    this.hostImage = obj.hostImage;
+    this.hostCancelReason = obj.hostCancelReason;
+    this.hostVideo = obj.hostVideo;
+    this.guestImage = obj.guestImage;
+    this.guestCancelReason = obj.guestCancelReason;
+    this.guestVideo = obj.guestVideo;
     this.bids = []
 
     if (obj.status && obj.status == "published") {

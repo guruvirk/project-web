@@ -38,7 +38,9 @@ export class PurchaseComponent implements OnInit {
     this.transactionService.add(this.amount, this.transactionId).subscribe(transaction => {
       if (transaction && transaction.status == "done") {
         this.uxService.showInfo(`${transaction.coins} Coins Added Succesfully`)
-        this.auth.changeUser(transaction.user)
+        let user = this.auth.currentUser()
+        user.coins = transaction.user.coins
+        this.auth.changeUser(user)
         this.router.navigate(["home"])
       }
     })

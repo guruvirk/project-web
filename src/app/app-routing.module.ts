@@ -8,6 +8,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SellComponent } from './sell/sell.component';
 import { ContestComponent } from './contest/contest.component';
+import { ConflictComponent } from './conflict/conflict.component';
+import { CancelComponent } from './cancel/cancel.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,18 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
   { path: 'buy', component: PurchaseComponent, canActivate: [UserGuard] },
   { path: 'sell', component: SellComponent, canActivate: [UserGuard] },
+  {
+    path: 'conflict', component: ConflictComponent, canActivate: [UserGuard],
+    data: {
+      permissions: ['admin']
+    }
+  },
+  {
+    path: 'cancel', component: CancelComponent, canActivate: [UserGuard],
+    data: {
+      permissions: ['admin']
+    }
+  }
 ];
 
 @NgModule({

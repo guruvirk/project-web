@@ -5,6 +5,7 @@ import { Bid } from './bid';
 export class Contest {
 
   id: string;
+  code: string;
   date: Date;
   host: User;
   guest: User;
@@ -33,6 +34,7 @@ export class Contest {
 
     this.id = obj.id;
     this.date = obj.date;
+    this.code = obj.code;
     this.roomCode = obj.roomCode;
     this.status = obj.status;
     this.host = new User(obj.host);

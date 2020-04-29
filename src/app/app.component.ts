@@ -29,12 +29,21 @@ export class AppComponent {
   ngOnInit(): void {
     this.currentUser = this.auth.currentUser();
     this.currentTenant = this.auth.currentTenant();
-    if(this.currentUser){
+    if (this.currentUser) {
       this.roter.navigate(["home"])
     }
+    this.userRefresh()
   }
 
-  logout(){
+  logout() {
     this.auth.logout()
+  }
+
+  userRefresh() {
+    this.auth.refreshUser()
+    let this_new = this
+    setTimeout(function () {
+      this_new.userRefresh()
+    }, 30000)
   }
 }

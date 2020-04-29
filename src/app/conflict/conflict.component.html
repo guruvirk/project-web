@@ -1,6 +1,6 @@
 <mat-accordion displayMode="flat" multi class="mat-table">
     <section matSort class="mat-elevation-z2 mat-header-row">
-        <span class="mat-header-cell" mat-sort-header="date">Date</span>
+        <span class="mat-header-cell" mat-sort-header="date">Info</span>
         <span class="mat-header-cell" mat-sort-header="coins">Coins</span>
         <span class="mat-header-cell" mat-sort-header="host">Host</span>
         <span class="mat-header-cell" mat-sort-header="hostResult">Host Result</span>
@@ -12,7 +12,7 @@
 
     <mat-expansion-panel *ngFor="let contest of contests">
         <mat-expansion-panel-header class="mat-row">
-            <span class="mat-cell">{{contest.date | date}}</span>
+            <span class="mat-cell">{{contest.code}} - {{contest.date | date}}</span>
             <span class="mat-cell">{{contest.coins}}</span>
             <span class="mat-cell">{{contest.host.name}} ({{contest.host.code}})<br>
                 <span class="sub-text">{{contest.host.phone}}</span></span>

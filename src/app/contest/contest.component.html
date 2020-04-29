@@ -2,13 +2,14 @@
     <ng-container *ngIf="isHost">
         <h6 class="title">{{contest.guest.name}} ({{contest.guest.code}}) vs You</h6>
         <p style="font-size: 12px;" class="sub-title">{{contest.guest.name}} WhatsApp No -
-            {{contest.guest.phone}}<br>Challange Amount - {{contest.coins}}</p>
+            {{contest.guest.phone}}<br>Challange Amount - {{contest.coins}}<br>Contest Code - {{contest.code}}</p>
     </ng-container>
     <ng-container *ngIf="!isHost">
         <h6 class="title">{{contest.host.name}} ({{contest.host.code}}) vs You</h6>
         <p style="font-size: 12px;" class="sub-title">{{contest.host.name}} WhatsApp No -
             {{contest.host.phone}}<br>Challange Amount - {{contest.coins}}</p>
-        <p *ngIf="contest.roomCode" style="font-size: 12px;" class="sub-title">Room Code : <b>{{contest.roomCode}}</b></p>
+        <p *ngIf="contest.roomCode" style="font-size: 12px;" class="sub-title">Room Code : <b>{{contest.roomCode}}</b>
+        </p>
     </ng-container>
     <br>
     <ng-container *ngIf="contest.status=='ready'">

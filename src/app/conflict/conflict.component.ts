@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contest } from '../models';
 import { ContestService } from '../services/contest.service';
 import { RoleService } from '../services/role.service';
@@ -10,9 +10,10 @@ import { UxService } from '../services/ux.service';
   templateUrl: './conflict.component.html',
   styleUrls: ['./conflict.component.scss']
 })
-export class ConflictComponent implements OnInit {
+export class ConflictComponent implements OnInit, OnDestroy {
 
   contests: Contest[]
+  timeOutIDs: any[] = [];
 
   constructor(private api: ContestService,
     private auth: RoleService,
@@ -21,6 +22,10 @@ export class ConflictComponent implements OnInit {
 
   ngOnInit() {
     this.getData()
+  }
+
+  ngOnDestroy(): void {
+    this.timeOutIDs.forEach(id => clearTimeout(id));
   }
 
   getContests() {
@@ -33,9 +38,10 @@ export class ConflictComponent implements OnInit {
   getData() {
     this.getContests()
     let this_new = this
+    this.timeOutIDs.push(
     setTimeout(function () {
       this_new.getData()
-    }, 10000);
+    }, 10000));
   }
 
   submitResult(contest: Contest) {

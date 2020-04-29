@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Transaction } from '../models';
 import { TransactionService } from '../services/transaction.service';
 import { UxService } from '../services/ux.service';
@@ -8,10 +8,11 @@ import { UxService } from '../services/ux.service';
   templateUrl: './sell-requests.component.html',
   styleUrls: ['./sell-requests.component.css']
 })
-export class SellRequestsComponent implements OnInit {
+export class SellRequestsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['label', 'mobile', 'coins', 'date', 'action'];
   transactions: Transaction[];
+  timeOutIDs: any[] = [];
 
   constructor(private api: TransactionService,
     private uxService: UxService) { }
@@ -20,17 +21,29 @@ export class SellRequestsComponent implements OnInit {
     this.getData()
   }
 
+  ngOnDestroy(): void {
+    this.timeOutIDs.forEach(id => clearTimeout(id));
+  }
+
   getData() {
     this.getTransactions()
     let this_new = this
+    this.timeOutIDs.push(
     setTimeout(function () {
       this_new.getData()
-    }, 30000);
+    }, 100000));
   }
 
   getTransactions() {
-    this.api.search({ status: "pending", type: "out" }).subscribe(items => {
+    this.api.search({ status: ["pending", "initiated"], type: "out" }).subscribe(items => {
       this.transactions = items
+    })
+  }
+
+  initiate(transaction: Transaction) {
+    this.api.initiate(transaction).subscribe(() => {
+      this.uxService.showInfo("Updated Successfully")
+      this.getTransactions()
     })
   }
 
@@ -40,6 +53,7 @@ export class SellRequestsComponent implements OnInit {
       this.getTransactions()
     })
   }
+
 
   refund(transaction: Transaction) {
     this.api.refund(transaction).subscribe(() => {

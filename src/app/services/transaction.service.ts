@@ -35,6 +35,14 @@ export class TransactionService {
     return this._txnApi.create('transactions/resolve', { transaction: transaction })
   }
 
+  initiate(transaction: Transaction): Observable<Transaction> {
+    return this._txnApi.create('transactions/initiate', { transaction: transaction })
+  }
+
+  cancel(transaction: Transaction): Observable<Transaction> {
+    return this._txnApi.create('transactions/cancel', { transaction: transaction })
+  }
+
   search(query): Observable<Transaction[]> {
     return this._txnApi.search(`transactions`, query)
   }

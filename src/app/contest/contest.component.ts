@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Contest } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from '../services/role.service';
@@ -10,7 +10,7 @@ import { UxService } from '../services/ux.service';
   templateUrl: './contest.component.html',
   styleUrls: ['./contest.component.css'],
 })
-export class ContestComponent implements OnInit {
+export class ContestComponent implements OnInit, OnDestroy {
 
   id: string;
   roomCode: string;
@@ -26,6 +26,7 @@ export class ContestComponent implements OnInit {
   comment: string;
   image: File;
   video: File;
+  timeOutIDs: any[] = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -47,6 +48,10 @@ export class ContestComponent implements OnInit {
     this.setContest()
   }
 
+  ngOnDestroy(): void {
+    this.timeOutIDs.forEach(id => clearTimeout(id));
+  }
+
   setRoomCode() {
     if (!this.roomCode) {
       this.uxService.handleError("Room Code is Required")
@@ -61,9 +66,10 @@ export class ContestComponent implements OnInit {
   setContest() {
     this.getContest()
     let this_new = this
+    this.timeOutIDs.push(
     setTimeout(function () {
       this_new.setContest()
-    }, 5000);
+    }, 5000));
   }
 
   getContest() {

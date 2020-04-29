@@ -182,6 +182,7 @@ export class RoleService implements IAuth {
     this._authApi.get(`users/my`).subscribe(item => {
       user.code = item.code
       user.coins = item.coins
+      user.permissions = item.permissions
       this.localDb.update('user', user);
       this._user = user
       this._userSubject.next(this._user)

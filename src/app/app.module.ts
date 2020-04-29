@@ -24,6 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ConflictComponent } from './conflict/conflict.component';
 import { CancelComponent } from './cancel/cancel.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatSelectModule } from '@angular/material/select';
     SellComponent,
     ContestComponent,
     ConflictComponent,
-    CancelComponent
+    CancelComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

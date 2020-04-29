@@ -10,10 +10,12 @@ import { SellComponent } from './sell/sell.component';
 import { ContestComponent } from './contest/contest.component';
 import { ConflictComponent } from './conflict/conflict.component';
 import { CancelComponent } from './cancel/cancel.component';
+import { ResetComponent } from './reset/reset.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'reset', component: ResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'confirm/:id', component: ConfirmComponent },
   { path: 'contest/:id', component: ContestComponent, canActivate: [UserGuard] },

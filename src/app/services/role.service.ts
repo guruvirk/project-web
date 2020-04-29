@@ -64,6 +64,14 @@ export class RoleService implements IAuth {
     return this._authApi.create('users/create', user)
   }
 
+  sendOtp(phone): Observable<any> {
+    return this._authApi.create('users/sendOtp', { phone: phone })
+  }
+
+  changePasswordWithOtp(phone, otp, password): Observable<any> {
+    return this._authApi.create('users/changePasswordWithOtp', { user: { phone: phone }, otp: otp, password: password })
+  }
+
   codeExists(code: String): Boolean {
     let result = true
     this._authApi.get(`users/codeExists/${code}`).subscribe(response => {

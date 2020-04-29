@@ -8,5 +8,8 @@
             <input matInput name="password" placeholder="Password" [(ngModel)]="password" [required]="true">
         </mat-form-field>
         <button mat-stroked-button color="primary" (click)="login()">Login</button>
+        <br>
+        <p class="title">New here? <a [routerLink]="['/','register']">Sign up now »</a></p>
+        <p><a [routerLink]="['/', 'reset']">Forgot password?</a></p>
     </mat-card-content>
 </mat-card>

@@ -1,5 +1,5 @@
 export const environment = {
-  url: 'http://192.168.43.246:8080/api',
+  url: 'http://3.20.237.55/api',
   production: false,
   tenant: "ludo",
   error: {

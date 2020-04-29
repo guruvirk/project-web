@@ -27,4 +27,16 @@ export class TransactionService {
     return this._txnApi.create('transactions/out', { phone: phone, coins: coins })
   }
 
+  refund(transaction: Transaction): Observable<Transaction> {
+    return this._txnApi.create('transactions/refund', { transaction: transaction })
+  }
+
+  resolve(transaction: Transaction): Observable<Transaction> {
+    return this._txnApi.create('transactions/resolve', { transaction: transaction })
+  }
+
+  search(query): Observable<Transaction[]> {
+    return this._txnApi.search(`transactions`, query)
+  }
+
 }

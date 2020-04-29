@@ -11,6 +11,8 @@ import { ContestComponent } from './contest/contest.component';
 import { ConflictComponent } from './conflict/conflict.component';
 import { CancelComponent } from './cancel/cancel.component';
 import { ResetComponent } from './reset/reset.component';
+import { HistoryComponent } from './history/history.component';
+import { SellRequestsComponent } from './sell-requests/sell-requests.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
   { path: 'buy', component: PurchaseComponent, canActivate: [UserGuard] },
   { path: 'sell', component: SellComponent, canActivate: [UserGuard] },
+  { path: 'history', component: HistoryComponent, canActivate: [UserGuard] },
   {
     path: 'conflict', component: ConflictComponent, canActivate: [UserGuard],
     data: {
@@ -30,6 +33,12 @@ const routes: Routes = [
   },
   {
     path: 'cancel', component: CancelComponent, canActivate: [UserGuard],
+    data: {
+      permissions: ['admin']
+    }
+  },
+  {
+    path: 'sell-req', component: SellRequestsComponent, canActivate: [UserGuard],
     data: {
       permissions: ['admin']
     }

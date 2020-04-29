@@ -3,6 +3,7 @@ import { User } from './user.model';
 export class Transaction {
 
   id: string;
+  label: string;
   date: Date;
   type: string;
   user: User;
@@ -17,6 +18,7 @@ export class Transaction {
     }
 
     this.id = obj.id;
+    this.label = obj.label;
     this.date = obj.date;
     this.type = obj.type;
     this.status = obj.status;

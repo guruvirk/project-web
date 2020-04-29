@@ -25,6 +25,9 @@ import { ConflictComponent } from './conflict/conflict.component';
 import { CancelComponent } from './cancel/cancel.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ResetComponent } from './reset/reset.component';
+import { HistoryComponent } from './history/history.component';
+import { MatTableModule } from '@angular/material/table';
+import { SellRequestsComponent } from './sell-requests/sell-requests.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { ResetComponent } from './reset/reset.component';
     ContestComponent,
     ConflictComponent,
     CancelComponent,
-    ResetComponent
+    ResetComponent,
+    HistoryComponent,
+    SellRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { ResetComponent } from './reset/reset.component';
     MatExpansionModule,
     MatBadgeModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

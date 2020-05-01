@@ -42,3 +42,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: small;
     color: var(--primary);
   }
+
+  .text-justified {
+    text-align: justify;
+  }
+
+  .center {
+    text-align: center;
+  }

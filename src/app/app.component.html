@@ -8,21 +8,31 @@
             <span flex></span>
             <!-- <span class="menu-spacer"></span> -->
             <div fxShow="true" fxHide.lt-md>
+                <button *ngIf="!auth.hasPermission('admin')" [routerLink]="['help']" mat-button>Help</button>
+                <button *ngIf="!auth.hasPermission('admin')" [routerLink]="['tnc']" mat-button>T&C</button>
+                <button *ngIf="currentUser" [routerLink]="['setting']" mat-button>Setting</button>
                 <button *ngIf="!currentUser" [routerLink]="['login']" mat-button>Login</button>
                 <button *ngIf="!currentUser" [routerLink]="['register']" mat-button>Register</button>
-                <button *ngIf="currentUser" [routerLink]="['home']" mat-button>Home</button>
-                <button *ngIf="currentUser" [routerLink]="['buy']" mat-button>Buy Coins</button>
-                <button *ngIf="currentUser" [routerLink]="['sell']" mat-button>Sell Coins</button>
-                <button *ngIf="currentUser" [routerLink]="['history']" mat-button>History</button>
+                <button *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['home']"
+                    mat-button>Home</button>
+                <button *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['buy']" mat-button>Buy
+                    Coins</button>
+                <button *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['sell']" mat-button>Sell
+                    Coins</button>
+                <button *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['history']"
+                    mat-button>History</button>
                 <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['cancel']" mat-button>Cancel
                     Requests</button>
                 <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['conflict']"
                     mat-button>Conflit
                     Contests</button>
+                <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['timeout']" mat-button>Timed
+                    Out Requests</button>
                 <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['sell-req']" mat-button>Sell
                     Requests</button>
             </div>
-            <button *ngIf="currentUser" mat-button>Coins: {{currentUser.coins || 0}}</button>
+            <button *ngIf="!auth.hasPermission('admin') && currentUser" mat-button>Coins:
+                {{currentUser.coins || 0}}</button>
             <button *ngIf="currentUser" (click)="logout()" mat-button>Logout</button>
         </mat-toolbar-row>
     </mat-toolbar>
@@ -31,18 +41,30 @@
         <mat-sidenav #sidenav>
             <mat-nav-list>
                 <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+                <a *ngIf="!auth.hasPermission('admin')" [routerLink]="['help']" routerLinkActive="active"
+                    mat-list-item>Help</a>
+                <a *ngIf="!auth.hasPermission('admin')" [routerLink]="['tnc']" routerLinkActive="active"
+                    mat-list-item>T&C</a>
+                <a *ngIf="currentUser" [routerLink]="['setting']" routerLinkActive="active" mat-list-item>Setting</a>
                 <a *ngIf="!currentUser" [routerLink]="['login']" routerLinkActive="active" mat-list-item>Login</a>
                 <a *ngIf="!currentUser" [routerLink]="['register']" routerLinkActive="active" mat-list-item>Register</a>
-                <a *ngIf="currentUser" [routerLink]="['home']" routerLinkActive="active" mat-list-item>Home</a>
-                <a *ngIf="currentUser" [routerLink]="['buy']" routerLinkActive="active" mat-list-item>Buy Coins</a>
-                <a *ngIf="currentUser" [routerLink]="['sell']" routerLinkActive="active" mat-list-item>Sell Coins</a>
-                <a *ngIf="currentUser" [routerLink]="['history']" routerLinkActive="active" mat-list-item>History</a>
+                <a *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['home']" routerLinkActive="active"
+                    mat-list-item>Home</a>
+                <a *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['buy']" routerLinkActive="active"
+                    mat-list-item>Buy Coins</a>
+                <a *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['sell']" routerLinkActive="active"
+                    mat-list-item>Sell Coins</a>
+                <a *ngIf="!auth.hasPermission('admin') && currentUser" [routerLink]="['history']"
+                    routerLinkActive="active" mat-list-item>History</a>
                 <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['cancel']"
                     routerLinkActive="active" mat-list-item>Cancel
                     Requests</a>
                 <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['conflict']"
                     routerLinkActive="active" mat-list-item>Conflit
                     Contests</a>
+                <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['timeout']"
+                    routerLinkActive="active" mat-list-item>Timed
+                    Out Requests</a>
                 <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['sell-req']"
                     routerLinkActive="active" mat-list-item>Sell
                     Requests</a>

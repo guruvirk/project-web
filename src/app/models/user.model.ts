@@ -18,6 +18,7 @@ export class User {
   coins: Number;
   tenant: Tenant;
   permissions: String[]
+  sellLimit: Number;
 
   constructor(obj?: any) {
     if (!obj) {
@@ -37,6 +38,7 @@ export class User {
     this.session = new Session(obj.session);
     this.coins = obj.coins;
     this.tenant = new Tenant(obj.tenant);
+    this.sellLimit = Number(obj.sellLimit) >= 0 ? obj.sellLimit : 2;
     this.permissions = obj.permissions || []
   }
 }

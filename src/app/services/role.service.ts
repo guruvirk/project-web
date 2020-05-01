@@ -64,12 +64,20 @@ export class RoleService implements IAuth {
     return this._authApi.create('users/create', user)
   }
 
+  changeCode(user, code): Observable<any> {
+    return this._authApi.create('users/changeCode', { user: user, code: code })
+  }
+
   sendOtp(phone): Observable<any> {
     return this._authApi.create('users/sendOtp', { phone: phone })
   }
 
   changePasswordWithOtp(phone, otp, password): Observable<any> {
     return this._authApi.create('users/changePasswordWithOtp', { user: { phone: phone }, otp: otp, password: password })
+  }
+
+  changePassword(user, password, newPassword): Observable<any> {
+    return this._authApi.create('users/changePassword', { user: user, password: password, newPassword: newPassword })
   }
 
   codeExists(code: String): Boolean {
@@ -183,6 +191,7 @@ export class RoleService implements IAuth {
       user.code = item.code
       user.coins = item.coins
       user.permissions = item.permissions
+      user.sellLimit = item.sellLimit
       this.localDb.update('user', user);
       this._user = user
       this._userSubject.next(this._user)

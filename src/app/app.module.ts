@@ -4,30 +4,35 @@ import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ConfirmComponent } from './confirm/confirm.component';
+import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { PurchaseComponent } from './purchase/purchase.component';
-import { SellComponent } from './sell/sell.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
+import { SellComponent } from './pages/sell/sell.component';
 import { MatSnackBarModule } from "@angular/material";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
-import { ContestComponent } from './contest/contest.component';
+import { ContestComponent } from './pages/contest/contest.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { ConflictComponent } from './conflict/conflict.component';
-import { CancelComponent } from './cancel/cancel.component';
+import { ConflictComponent } from './pages/conflict/conflict.component';
+import { CancelComponent } from './pages/cancel/cancel.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ResetComponent } from './reset/reset.component';
-import { HistoryComponent } from './history/history.component';
+import { ResetComponent } from './pages/reset/reset.component';
+import { HistoryComponent } from './pages/history/history.component';
 import { MatTableModule } from '@angular/material/table';
-import { SellRequestsComponent } from './sell-requests/sell-requests.component';
+import { SellRequestsComponent } from './pages/sell-requests/sell-requests.component';
+import { TimeoutComponent } from './pages/timeout/timeout.component';
+import { TncComponent } from './pages/tnc/tnc.component';
+import { HelpComponent } from './pages/help/help.component';
+import { SettingComponent } from './pages/setting/setting.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,12 @@ import { SellRequestsComponent } from './sell-requests/sell-requests.component';
     CancelComponent,
     ResetComponent,
     HistoryComponent,
-    SellRequestsComponent
+    SellRequestsComponent,
+    TimeoutComponent,
+    TncComponent,
+    HelpComponent,
+    SettingComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

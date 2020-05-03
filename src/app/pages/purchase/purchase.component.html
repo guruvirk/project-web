@@ -18,7 +18,7 @@
             <input matInput numbersOnly name="amount" placeholder="Amount" [(ngModel)]="amount" minlength="0"
                 maxlength="5" [required]="true">
         </mat-form-field>
-        <form ngNoForm action="{{url}}" (ngSubmit)="validate()" method="post">
+        <form ngNoForm action="{{url}}" method="post">
             <input name="amount" class="hidden" [value]="amount">
             <input name="x-session" class="hidden" [value]="sessionId">
             <input type="submit" id="submit" [disabled]="!amount || !sessionId" class="hidden" value="Pay Now" />

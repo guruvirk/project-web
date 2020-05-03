@@ -15,10 +15,10 @@
                 [(ngModel)]="phone" minlength="10" maxlength="10" [required]="true">
         </mat-form-field>
         <mat-form-field class="full-width-input">
-            <input matInput name="password" placeholder="Password" [(ngModel)]="password" [required]="true">
+            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="password" [required]="true">
         </mat-form-field>
         <mat-form-field class="full-width-input">
-            <input matInput name="confirm-password" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
+            <input matInput type="password" name="confirm-password" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
                 [required]="true">
         </mat-form-field>
         <mat-checkbox [(ngModel)]="tnc"></mat-checkbox>

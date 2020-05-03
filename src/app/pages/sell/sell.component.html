@@ -10,6 +10,10 @@
             <input matInput numbersOnly name="phone" placeholder="Paytm Mobile No" [(ngModel)]="phone" minlength="10"
                 maxlength="10" [required]="true">
         </mat-form-field>
+        <h5 class="title center">Or</h5>
+        <mat-form-field class="full-width-input">
+            <input matInput name="upi" placeholder="UPI" [(ngModel)]="upi" [required]="true">
+        </mat-form-field>
         <mat-form-field class="full-width-input">
             <input matInput numbersOnly name="amount" placeholder="Amount" [(ngModel)]="amount" minlength="0"
                 maxlength="4" [required]="true">

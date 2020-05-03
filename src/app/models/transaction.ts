@@ -10,6 +10,7 @@ export class Transaction {
   status: string;
   coins: Number;
   accNo: Number;
+  upi: string;
   transactionId: string;
 
   constructor(obj?: any) {
@@ -26,6 +27,7 @@ export class Transaction {
     this.coins = obj.coins;
     this.transactionId = obj.transactionId;
     this.accNo = obj.accNo;
+    this.upi = obj.upi;
 
   }
 }

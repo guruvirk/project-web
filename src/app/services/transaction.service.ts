@@ -23,8 +23,8 @@ export class TransactionService {
     return this._txnApi.create('transactions/add', { amount: amount })
   }
 
-  out(phone, coins): Observable<Transaction> {
-    return this._txnApi.create('transactions/out', { phone: phone, coins: coins })
+  out(phone, upi, coins): Observable<Transaction> {
+    return this._txnApi.create('transactions/out', { phone: phone, upi: upi, coins: coins })
   }
 
   refund(transaction: Transaction): Observable<Transaction> {

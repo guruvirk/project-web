@@ -14,6 +14,7 @@ export class SellComponent implements OnInit {
   phone: number
   amount: number
   tnc: Boolean
+  upi: string
 
   constructor(private auth: RoleService,
     private transactionService: TransactionService,
@@ -24,12 +25,12 @@ export class SellComponent implements OnInit {
   }
 
   sell() {
-    if(!this.auth.currentUser().sellLimit){
+    if (!this.auth.currentUser().sellLimit) {
       this.uxService.handleError("Limit Exausted for Today")
       return
     }
-    if (!this.phone) {
-      this.uxService.handleError("Paytm Mobile No is required")
+    if (!this.phone && !this.upi) {
+      this.uxService.handleError("Paytm Mobile No or UPI is required")
       return
     }
     if (!this.amount || this.amount < 1) {
@@ -44,7 +45,7 @@ export class SellComponent implements OnInit {
       this.uxService.handleError("Please accept T&C")
       return
     }
-    this.transactionService.out(this.phone, this.amount).subscribe(transaction => {
+    this.transactionService.out(this.phone, this.upi, this.amount).subscribe(transaction => {
       if (transaction && transaction.status == "pending") {
         this.uxService.showInfo(`${transaction.coins} Coins Sell Request Submitted`)
         let user = this.auth.currentUser()

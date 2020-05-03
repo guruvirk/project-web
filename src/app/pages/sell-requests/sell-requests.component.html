@@ -10,6 +10,11 @@
             <td mat-cell *matCellDef="let element"> {{element.accNo}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="upi">
+            <th mat-header-cell *matHeaderCellDef> UPI </th>
+            <td mat-cell *matCellDef="let element"> {{element.upi || '--'}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="coins">
             <th mat-header-cell *matHeaderCellDef> Coins </th>
             <td mat-cell *matCellDef="let element"> {{element.coins}} </td>

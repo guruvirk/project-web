@@ -10,7 +10,7 @@ import { UxService } from '../../services/ux.service';
 })
 export class SellRequestsComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['label', 'mobile', 'coins', 'date', 'action'];
+  displayedColumns: string[] = ['label', 'mobile', 'upi', 'coins', 'date', 'action'];
   transactions: Transaction[];
   timeOutIDs: any[] = [];
 

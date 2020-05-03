@@ -29,8 +29,8 @@ export class AppComponent {
   ngOnInit(): void {
     this.currentUser = this.auth.currentUser();
     this.currentTenant = this.auth.currentTenant();
-    if (this.currentUser) {
-      this.roter.navigate(["home"])
+    if (!this.currentUser) {
+      this.roter.navigate(["login"])
     }
     this.userRefresh()
   }

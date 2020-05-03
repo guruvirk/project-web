@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contest } from '../../models/contest';
 import { RoleService } from '../../services/role.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UxService } from '../../services/ux.service';
 import { ContestService } from '../../services/contest.service';
 import { BidService } from '../../services/bid.service';
@@ -22,9 +22,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private api: ContestService,
     private bidService: BidService,
+    private route: ActivatedRoute,
     private auth: RoleService,
     private router: Router,
-    private uxService: UxService) { }
+    private uxService: UxService) {
+    if (!this.auth.currentUser()) {
+      this.router.navigate(["/login"])
+    }
+    this.route.params.subscribe((params) => {
+      if (params.status) {
+        this.uxService.handleError(params.status)
+      }
+    })
+  }
 
   ngOnInit() {
     this.getData()

@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
     private uxService: UxService) { }
 
   ngOnInit() {
+    if (this.auth.currentUser()) {
+      this.router.navigate(["home"])
+    }
   }
 
   login() {

@@ -22,6 +22,7 @@ import { SellRequestsComponent } from './pages/sell-requests/sell-requests.compo
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reset', component: ResetComponent },
   { path: 'tnc', component: TncComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'confirm/:id', component: ConfirmComponent },
   { path: 'contest/:id', component: ContestComponent, canActivate: [UserGuard] },
   { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
+  { path: 'home/:status', component: HomeComponent, canActivate: [UserGuard] },
   { path: 'setting', component: SettingComponent, canActivate: [UserGuard] },
   { path: 'buy', component: PurchaseComponent, canActivate: [UserGuard] },
   { path: 'sell', component: SellComponent, canActivate: [UserGuard] },

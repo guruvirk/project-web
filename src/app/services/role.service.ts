@@ -204,9 +204,9 @@ export class RoleService implements IAuth {
     this.localDb.clear();
     this.localDb.update('tenant', tenant);
     this._userSubject.next(null);
-    this._userSubject.next(null);
+    this._user = null;
     this.uxService.showInfo("Logged Out Succefully")
-    this.router.navigate(["/"])
+    this.router.navigate(["/", "login"])
   }
 
 }

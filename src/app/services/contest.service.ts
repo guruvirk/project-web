@@ -57,6 +57,10 @@ export class ContestService {
     return this._api.create('contests/conflictResult', { contest: contest, result: result })
   }
 
+  timeOutResult(contest: Contest, result: string): Observable<Contest> {
+    return this._api.create('contests/timeOutResult', { contest: contest, result: result })
+  }
+
   cancelRequestResult(contest: Contest, result: string): Observable<Contest> {
     return this._api.create('contests/cancelRequestResult', { contest: contest, result: result })
   }

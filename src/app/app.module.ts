@@ -33,6 +33,7 @@ import { TncComponent } from './pages/tnc/tnc.component';
 import { HelpComponent } from './pages/help/help.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { AddRequestsComponent } from './pages/add-requests/add-requests.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     TncComponent,
     HelpComponent,
     SettingComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddRequestsComponent
   ],
   imports: [
     BrowserModule,

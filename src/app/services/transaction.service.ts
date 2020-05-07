@@ -19,8 +19,8 @@ export class TransactionService {
     this._txnApi = new GenericService(this.http, this.roleService, this.uxService);
   }
 
-  add(amount): Observable<Transaction> {
-    return this._txnApi.create('transactions/add', { amount: amount })
+  add(amount, txnId, accNo): Observable<Transaction> {
+    return this._txnApi.create('transactions/add', { amount: amount, transactionId: txnId, accNo: accNo })
   }
 
   out(phone, upi, coins): Observable<Transaction> {
@@ -33,6 +33,10 @@ export class TransactionService {
 
   resolve(transaction: Transaction): Observable<Transaction> {
     return this._txnApi.create('transactions/resolve', { transaction: transaction })
+  }
+
+  resolveAdd(transaction: Transaction): Observable<Transaction> {
+    return this._txnApi.create('transactions/resolveAdd', { transaction: transaction })
   }
 
   initiate(transaction: Transaction): Observable<Transaction> {

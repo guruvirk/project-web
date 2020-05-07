@@ -2,27 +2,29 @@
     <mat-card-content>
         <div class="center title">
             <h4>(1Rupee = 1Chip)</h4><br>
-            <!-- <h5 style="color: red;">* Pay via Paytm Wallet Only<br>
+            <h5 style="color: red;">* Pay via Paytm Wallet Only<br>
                 * Dont pay through Bank (You will lose your money).</h5><br>
-            <h5>Please pay at below giver number, and enter wallet Transcation Id.</h5><br> -->
+            <h5>Please pay at below giver number, and enter wallet Transcation Id.</h5><br>
         </div>
-        <!-- <mat-form-field class="full-width-input">
+        <mat-form-field class="full-width-input">
             <input matInput name="pytmNumber" #phone placeholder="Paytm Number" [(ngModel)]="tenant.phone" readonly>
         </mat-form-field>
         <button mat-stroked-button color="primary" (click)="copy(phone)">Copy</button>
         <mat-form-field class="full-width-input">
-            <input matInput name="transactionId" placeholder="Transaction Id" [(ngModel)]="transactionId"
-                [required]="true">
-        </mat-form-field> -->
+            <input matInput name="transactionId" placeholder="Transaction Id" [(ngModel)]="txnId" [required]="true">
+        </mat-form-field>
         <mat-form-field class="full-width-input">
             <input matInput numbersOnly name="amount" placeholder="Amount" [(ngModel)]="amount" minlength="0"
                 maxlength="5" [required]="true">
         </mat-form-field>
-        <form ngNoForm action="{{url}}" method="post">
+        <mat-form-field class="full-width-input">
+            <input matInput name="paidFrom" #phone placeholder="Paid From" [(ngModel)]="accNo">
+        </mat-form-field>
+        <!-- <form ngNoForm action="{{url}}" method="post">
             <input name="amount" class="hidden" [value]="amount">
             <input name="x-session" class="hidden" [value]="sessionId">
             <input type="submit" id="submit" [disabled]="!amount || !sessionId" class="hidden" value="Pay Now" />
-        </form>
+        </form> -->
         <button mat-stroked-button color="primary" (click)="add()">Load</button>
         <br>
         <h5 class="center title"><br>If some error occures. Don't worry,<br>

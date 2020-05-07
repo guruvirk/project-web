@@ -18,6 +18,8 @@ export class PurchaseComponent implements OnInit {
   tenant: Tenant
   url: string
   sessionId: string
+  accNo: string;
+  txnId: string;
 
   constructor(private auth: RoleService,
     private transactionService: TransactionService,
@@ -26,6 +28,7 @@ export class PurchaseComponent implements OnInit {
     this.tenant = auth.currentTenant()
     this.url = `${environment.url}/transactions/add`
     this.sessionId = this.auth.currentUser().session.id
+    this.accNo = this.auth.currentUser().phone
   }
 
   ngOnInit() {
@@ -38,6 +41,13 @@ export class PurchaseComponent implements OnInit {
   }
 
   add() {
+    if (!this.txnId) {
+      this.uxService.handleError("Transaction Id is required")
+      return
+    } if (!this.accNo) {
+      this.uxService.handleError("Paid From is required")
+      return
+    }
     if (!this.amount || this.amount < 1) {
       this.uxService.handleError("Amount is required")
       return
@@ -46,16 +56,19 @@ export class PurchaseComponent implements OnInit {
       this.uxService.handleError("Limit is 20,000")
       return
     }
-    document.getElementById("submit").click();
-    // this.transactionService.add(this.amount).subscribe(transaction => {
-    //   if (transaction && transaction.status == "done") {
-    //     this.uxService.showInfo(`${transaction.coins} Coins Added Succesfully`)
-    //     let user = this.auth.currentUser()
-    //     user.coins = transaction.user.coins
-    //     this.auth.changeUser(user)
-    //     this.router.navigate(["home"])
-    //   }
-    // })
+    // document.getElementById("submit").click();
+    this.transactionService.add(this.amount, this.txnId, this.accNo).subscribe(transaction => {
+      if (transaction && transaction.status == "done") {
+        this.uxService.showInfo(`${transaction.coins} Coins Added Succesfully`)
+        let user = this.auth.currentUser()
+        user.coins = transaction.user.coins
+        this.auth.changeUser(user)
+        this.router.navigate(["home"])
+      } else {
+        this.uxService.showInfo(`Request Submitted Succesfully`)
+        this.router.navigate(["home"])
+      }
+    })
   }
 
 }

@@ -27,6 +27,8 @@
                     Out Requests</button>
                 <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['sell-req']" mat-button>Sell
                     Requests</button>
+                <button *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['add-req']" mat-button>Add
+                    Requests</button>
                 <button *ngIf="currentUser" [routerLink]="['setting']" mat-button>Setting</button>
                 <button *ngIf="!auth.hasPermission('admin')" [routerLink]="['help']" mat-button>Help</button>
                 <button *ngIf="!auth.hasPermission('admin')" [routerLink]="['tnc']" mat-button>T&C</button>
@@ -62,6 +64,9 @@
                     Out Requests</a>
                 <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['sell-req']"
                     routerLinkActive="active" mat-list-item>Sell
+                    Requests</a>
+                <a *ngIf="auth.hasPermission('admin') && currentUser" [routerLink]="['add-req']"
+                    routerLinkActive="active" mat-list-item>Add
                     Requests</a>
                 <a *ngIf="!auth.hasPermission('admin')" [routerLink]="['help']" routerLinkActive="active"
                     mat-list-item>Help</a>

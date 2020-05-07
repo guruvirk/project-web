@@ -49,8 +49,8 @@ export class TimeoutComponent implements OnInit, OnDestroy {
       this.uxService.handleError("Please Select Result")
       return
     }
-    this.api.conflictResult(contest, contest.result).subscribe(() => {
-      this.uxService.showInfo("Conflict Resolved Successfully")
+    this.api.timeOutResult(contest, contest.result).subscribe(() => {
+      this.uxService.showInfo("Contest Updated Successfully")
       this.getContests()
     })
   }

@@ -18,6 +18,7 @@ import { ConflictComponent } from './pages/conflict/conflict.component';
 import { TimeoutComponent } from './pages/timeout/timeout.component';
 import { CancelComponent } from './pages/cancel/cancel.component';
 import { SellRequestsComponent } from './pages/sell-requests/sell-requests.component';
+import { AddRequestsComponent } from './pages/add-requests/add-requests.component';
 
 
 
@@ -57,6 +58,12 @@ const routes: Routes = [
   },
   {
     path: 'sell-req', component: SellRequestsComponent, canActivate: [UserGuard],
+    data: {
+      permissions: ['admin']
+    }
+  },
+  {
+    path: 'add-req', component: AddRequestsComponent, canActivate: [UserGuard],
     data: {
       permissions: ['admin']
     }

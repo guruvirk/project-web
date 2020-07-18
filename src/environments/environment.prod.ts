@@ -1,5 +1,5 @@
 export const environment = {
-  url: 'http://18.188.107.175/api',
+  url: 'https://playludo.live/api',
   production: false,
   tenant: "ludo",
   error: {

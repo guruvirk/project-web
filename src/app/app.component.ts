@@ -40,7 +40,9 @@ export class AppComponent {
   }
 
   userRefresh() {
-    this.auth.refreshUser()
+    if (this.auth.currentUser()) {
+      this.auth.refreshUser()
+    }
     let this_new = this
     setTimeout(function () {
       this_new.userRefresh()
